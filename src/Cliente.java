@@ -22,17 +22,15 @@ public class Cliente extends Thread{
     private String host;//Nombre del host del servidor
     private List<String> lista;//Lista de informacion de la entrada de datos del servidor
     private JLabel info, state;//Etiquetas para indicar el estado de la actualizacion
+    private JButton temp;
     //Creamos el cliente
-    public Cliente(JLabel A, JLabel B){
+    public Cliente(JLabel A, JLabel B, JButton C){
         info = B;
         state = A;
+        temp = C;
         state.setText("Comprobando actualizaciones...");
         host = "minechinchas.no-ip.org";
         lista = new ArrayList<String>();
-        boolean send = crear(); //Llamamos al método crear para inicializar la escucha al servidor
-        if (send){//Solo si se ha creado la escucha sin problemas, se envían los datos de la versión actual
-            enviar();
-        }
     }
     //Método para salir del bucle
     public void salir(){
@@ -62,6 +60,7 @@ public class Cliente extends Thread{
             state.setForeground(Color.GREEN);
             state.setText("No existen actualizaciones disponibles");
             salir();//Salimos del bucle
+            temp.setEnabled(true);
         } else if (msg.equals("false")){//Si el mensaje es false, indica que hay nuevas versiones
             lista.add(msg);//Añadimos los datos a la lista de datos
             /*Los datos proporcionados por el servidor son:
@@ -70,6 +69,7 @@ public class Cliente extends Thread{
              * 3º-nombre de la versión (Solo si la versión es antigua)
              * 4º-"exit" (Indica que es el último mensaje)
              */
+            temp.setEnabled(false);
         } else if (msg.equals("exit")){//Si es el último mensaje, salimos del bucle y actualizamos
             exit = true;
             actualizar();
@@ -106,6 +106,15 @@ public class Cliente extends Thread{
     //Método de ejecución
     @Override
     public void run(){
+        boolean send = crear(); //Llamamos al método crear para inicializar la escucha al servidor
+        if (send){//Solo si se ha creado la escucha sin problemas, se envían los datos de la versión actual
+            enviar();
+        }
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException ex) {
+            
+        }
         while (!exit){
             try {//Leemos los datos que nos envía el servidor
                 String msg = input.readUTF();
@@ -130,6 +139,6 @@ public class Cliente extends Thread{
                 info.setText(ex.getMessage());
             }
         }
-        
+        temp.setEnabled(true);
     }
 }

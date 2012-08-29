@@ -88,7 +88,7 @@ public class Vista2 extends javax.swing.JFrame {
             }
         }
         //Creamos el cliente del actualizador
-        Cliente client = new Cliente(jLabel1, jLabel5);
+        Cliente client = new Cliente(jLabel1, jLabel5, jButton5);
         try{
             client.start();
         } catch(Exception e){
@@ -96,12 +96,6 @@ public class Vista2 extends javax.swing.JFrame {
             jLabel1.setText("ERROR!");
             jLabel5.setForeground(Color.red);
             jLabel5.setText(e.getMessage());
-        }
-        //Si el servidor no está conectado, dejamos jugar
-        if (!client.connected){
-            jButton5.setEnabled(true);
-        } else{ //Sino, actualizamos
-            jButton5.setText("Actualizando...");
         }
     }
 
@@ -465,6 +459,7 @@ public class Vista2 extends javax.swing.JFrame {
         jButton5.setBackground(new java.awt.Color(255, 153, 0));
         jButton5.setText("¡Jugar!");
         jButton5.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 102, 255), 4), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        jButton5.setEnabled(false);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
