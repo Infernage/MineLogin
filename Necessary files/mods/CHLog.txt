@@ -1,0 +1,179 @@
+﻿INDICE
+a)Changelog
+b)Mods eliminadas.
+c)Mods añadidas.
+d)Bugs.
+___________________________________________
+
+b) Changelog.
+
+Minecraft FORGE 3.3.8.152
+	Cambios importantes:
+	-Añadidas funcionalidades para mejorar el rendimiento de las 	mods.
+	-Añadido soporte nativo para ampliar las IDs desde 256 a 	4096.
+
+Not Enough Items 1.2.2.4
+Cambios importantes:
+-Fixes de errores.
+
+Industrialcraft 1.103
+	Cambios importantes:
+	-Los Teleporters pueden teleportar objetos y minecarts.
+	-Las NanoBotas (Nano Boots) ahora absorben parcialmente el 	daño de caída al igual que las de goma.
+-Los Mass Fabricator pueden usar Scrap Boxes como amplificadores.
+-Los Painters pueden pintar ovejas.
+-Reducida la producción eléctrica del Water Mill.
+	-Fixes de errores.
+
+BuildCraft 3.1.6.25 (Beta)
+Cambios importantes:
+-Añadidos láseres, puertas lógicas para tuberías y demás cosas chulas, como un copiador de terreno entero.
+-Fixes de errores.
+ATENCIÓN: Al ser una Beta tendrá errores. Cualquier error, confirmárselo al admin.
+
+Equivalent Exchange 1.4.6.5
+Cambios importantes:
+-Fixes de errores y cambios en los valores.
+
+Ender Storage 1.1.3
+Cambios importantes:
+-Fixes de errores.
+
+Inventory Tweaks 1.41b
+Cambios importantes:
+N/A
+
+Portal Gun V3
+Cambios importantes:
+-Añadido soporte para Multijugador.
+-Añadido un mejor renderizado para los portales.
+-Fixes de errores.
+
+RailCraft 5.4.7b
+Cambios importantes:
+-Añadido acoplamiento de Minecarts entre sí haciendo que puedan funcionar como trenes.
+-Añadido soporte para el acoplamiento en todos sus objetos.
+-Añadido Train Dispenser.
+-Añadido Train Detector.
+-Añadido Water Tank. Estructura de 3x3x3 que genera agua cada tiempo (dependiendo del bioma y otros factores).
+-Añadido Sheep Detector.
+-Añadido receta de Steel para el Minecart.
+-Añadido Reinforced Track.
+-Añadido Rock Crusher. Estructura de 3x2x2 que procesa varios materiales. Si está instalado cualquier versión del Buildcraft 3.x tiene que ser alimentado por un motor de este.
+-Añadido Crushed Obsidian.
+-Añadido Track Relayer.
+-Añadido Undercutter.
+-Añadidos demás cambios en los valores.
+-MUCHOS fixes de errores.
+
+Redpower 2 Pre-release 5b2
+Cambios importantes:
+-Fixes de errores y algunos cambios al Computer.
+
+Train Mod 2.1.2b
+Cambios importantes:
+-Añadido soporte para multijugador.
+-Añadida nueva interfaz gráfica.
+-Añadido Tank carts, Tenders y Steam locomotives pueden llevar ahora agua.
+-Añadido nuevo modelo para los trenes.
+-Añadido nuevo sistema de sobrecalentamiento.
+-Cambios a los valores.
+-Fixes de errores.
+
+Laser Mod 1.5
+Cambios importantes:
+N/A
+
+Secret Rooms 4.0.3
+Cambios importantes:
+-Añadido Camo- TrapDoors, Camo- Doors, Secret pressure plates y Camo- Ghost Blocks
+-Fixes de errores.
+
+Steves Carts 1.5.0 (SinglePlayer)
+Cambios importantes:
+-Añadidos otros Minecarts.
+-Fixes de errores.
+
+ThaumCraft 2.1.6d (SinglePlayer)
+Cambios importantes:
+-Fixes de errores y cambios a valores de la mod.
+
+Twilight Fores 1.10.1 (SinglePlayer)
+Cambios importantes:
+-Añadido mejor creación de mazmorras.
+-Añadido mejor renderizado para proporcionar menos lag.
+-Fixes de errores.
+ATENCIÓN! Se ha pasado a SinglePlayer debido a que no ha sido porteada (modificada) para Tekkit.
+
+Iron Chests 3.8.0.40
+Cambios importantes:
+-Fixes de errores.
+
+Wireless Redstone Chicken Bones 1.2.5
+Cambios importantes:
+N/A
+___________________________________________
+
+b)Mods eliminadas
+
+|Team Fortress 2 Teleporter|
+Eliminada por seguir aún el modelo de ModloaderMP, del que se deshizo el Minecraft FORGE con la compatibilidad del ForgeModLoader.
+
+|TurretMod|
+Eliminada por provocar conflictos en las IDs y reemplazar objetos de otras mods.
+
+|Wireless Redstone|
+Eliminada por tener una versión mejor de esta. (Wireless Redstone Chicken Bones 1.2.5).
+
+|THX Helicopter|
+Eliminada por seguir aún el modelo de ModloaderMP, del que se deshizo el Minecraft FORGE con la compatibilidad del ForgeModLoader.
+
+|Advanced Machines|
+Me duele quitar esta mod, pero se ha dejado de actualizar por lo que parece y no es compatible ya con la actual versión del IndustrialCraft.
+
+|Compact Solars|
+Se ha dejado de actualizar por lo que parece y no es compatible con la actual versión del IndustrialCraft, además de ser reemplazada por otra aún mejor.
+
+|Forestry|
+Mod eliminada por no ser compatible con esta versión del Buildcraft (3.1.6.50 Beta), ya que aún es Beta.
+
+|BuildCraft Additional Pipes|
+Mod eliminada por no ser compatible con esta versión del Buildcraft (3.1.6.50 Beta), ya que aún es Beta.
+
+|Logistic Pipes|
+Mod eliminada por no ser compatible con esta versión del Buildcraft (3.1.6.50 Beta), ya que aún es Beta.
+___________________________________________
+
+c)Mods añadidas.
+
+|ID Resolver 1.2.5 Update 1 RAW|
+Mod que permite el uso de una API para evitar el conflicto de IDs.
+
+|MystCraft 0.8.6b|
+Esta mod te permite crear mundos con libros. No, no miento, es la verdad. Se usará en el servidor para hacer uso de eventos.
+
+|ReiMinimap 3.2_04|
+Ese minimapa que estaba bug, ahora se vuelve a implementar porque parece que se ha arreglado el bug anterior.
+
+|HiddenPassage 1.0.3|
+Como su nombre indica, esta mod sirve para hacer pasadizos secretos. Son perfectos para tu aventura.
+
+|IC2 Nuclear Control 1.1.10b|
+Esta extensión del IndustrialCraft te sirve para hacer tu central nuclear más segura, con pantallas, alarmas, mecanismos de seguridad, y aún más cosas.
+
+|Modular Force Field System 2.0.6.0.Beta 12|
+Esta extensión del IndustrialCraft te sirve para crear escudos y hacer que gente no deseada invada tus cosas personales.
+
+|Advanced Solar Panels 3.0.0|
+Como decía antes, la mod de Compact Solars, por ahora será reemplazada por esta.
+
+|PowerCraft 3.4.5| SinglePlayer|
+Esta mod te permite crear fábricas en tus mundos.
+
+|Rocket Science 0.89| SinglePlayer|
+Esta extensión del IndustrialCraft te permite crear cohetes, paracaídas e incluso reactores de fusión nuclear.
+___________________________________________
+
+d) Bugs
+
+Debido a que no puedo estar actualizando esto cada 2x3, en el servidor pondré una lista de bugs y sino, crearé un blog donde se puedan ver todos esos bugs odiados.

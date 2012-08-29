@@ -80,7 +80,8 @@ public class Vista extends javax.swing.JFrame {
 
         jLabel4.setText("Introduce tu nombre de cuenta:");
 
-        jButton2.setText("Introducir nombre de jugador");
+        jButton2.setText("Aceptar");
+        jButton2.setPreferredSize(new java.awt.Dimension(72, 23));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -92,8 +93,9 @@ public class Vista extends javax.swing.JFrame {
         jButton3.setBackground(new java.awt.Color(0, 0, 0));
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton3.setForeground(new java.awt.Color(0, 204, 0));
-        jButton3.setText("¿Tienes cuenta de Minecraft oficial?");
+        jButton3.setText("Tengo cuenta de Minecraft");
         jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButton3.setPreferredSize(new java.awt.Dimension(184, 23));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -103,7 +105,8 @@ public class Vista extends javax.swing.JFrame {
         jButton4.setBackground(new java.awt.Color(255, 255, 51));
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton4.setForeground(new java.awt.Color(0, 0, 204));
-        jButton4.setText("¿Tienes Mineshafter?");
+        jButton4.setText("Tengo Mineshafter");
+        jButton4.setPreferredSize(new java.awt.Dimension(140, 23));
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -146,20 +149,20 @@ public class Vista extends javax.swing.JFrame {
                                 .addGap(10, 10, 10))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jTextField2)
-                                .addContainerGap())))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addComponent(jButton3)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addContainerGap())))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton4)
-                        .addGap(124, 124, 124))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 150, Short.MAX_VALUE)
                         .addComponent(jLabel3)
                         .addGap(152, 152, 152))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(166, 166, 166)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,8 +170,8 @@ public class Vista extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(147, 147, 147))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(111, 111, 111))))
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(132, 132, 132))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,13 +203,13 @@ public class Vista extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5))
         );
 
@@ -345,6 +348,7 @@ public class Vista extends javax.swing.JFrame {
           }
           System.exit(0);
         }
+        break;
       case 2:
         try {
           minecraft = Runtime.getRuntime().exec(new StringBuilder().append("java -Xmx1024M -Xms1024M -jar ").append(user).toString());
@@ -367,6 +371,7 @@ public class Vista extends javax.swing.JFrame {
           }
           System.exit(0);
         }
+          break;
       case 3:
         try {
           minecraft = Runtime.getRuntime().exec(new StringBuilder().append("java -Xmx2048M -Xms2048M -jar ").append(user).toString());
@@ -389,6 +394,7 @@ public class Vista extends javax.swing.JFrame {
           }
           System.exit(0);
         }
+          break;
       case 4:
         try {
           minecraft = Runtime.getRuntime().exec(new StringBuilder().append("java -Xmx4096M -Xms4096M -jar ").append(user).toString());
@@ -411,6 +417,7 @@ public class Vista extends javax.swing.JFrame {
           }
           System.exit(0);
         }
+          break;
       }
       //Creamos un Log en la carpeta de datos para controlar cuando se conecta cada usuario
       File log = new File(new StringBuilder().append(System.getProperty("user.home")).append("\\AppData\\Roaming\\Data\\LogMC.cfg").toString());
@@ -510,6 +517,7 @@ public class Vista extends javax.swing.JFrame {
           }
           System.exit(0);
         }
+          break;
       case 2:
         try {
           minecraftshafter = Runtime.getRuntime().exec(new StringBuilder().append("java -Xmx1024M -Xms1024M -jar ").append(user).toString());
@@ -532,6 +540,7 @@ public class Vista extends javax.swing.JFrame {
           }
           System.exit(0);
         }
+          break;
       case 3:
         try {
           minecraftshafter = Runtime.getRuntime().exec(new StringBuilder().append("java -Xmx2048M -Xms2048M -jar ").append(user).toString());
@@ -554,6 +563,7 @@ public class Vista extends javax.swing.JFrame {
           }
           System.exit(0);
         }
+          break;
       case 4:
         try {
           minecraftshafter = Runtime.getRuntime().exec(new StringBuilder().append("java -Xmx4096M -Xms4096M -jar ").append(user).toString());
@@ -576,6 +586,7 @@ public class Vista extends javax.swing.JFrame {
           }
           System.exit(0);
         }
+          break;
       }
       File log = new File(new StringBuilder().append(System.getProperty("user.home")).append("\\AppData\\Roaming\\Data\\LogMC.cfg").toString());
       if (!log.exists()) {
