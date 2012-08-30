@@ -699,41 +699,10 @@ public class Vista2 extends javax.swing.JFrame {
     }
     Process minecraft;
     String user = new StringBuilder().append(System.getProperty("user.home")).append("\\AppData\\Roaming\\.minecraft\\minecraft.jar").toString();
-    File bat = new File(System.getProperty("user.home") + "\\AppData\\Roaming\\.minecraft\\exec.bat");
-    if (!bat.exists()){
-            try {
-                bat.createNewFile();
-            } catch (IOException ex) {
-                JOptionPane.showMessageDialog(null, "Error, no se ha podido ejecutar Minecraft.");
-            if (!error.exists()) {
-                  try {
-                    error.createNewFile();
-                  }
-                  catch (IOException exe) {
-                  }
-              }
-            try {
-              PrintWriter pw = new PrintWriter(error);
-              pw.print(ex.getMessage());
-              pw.println();
-              pw.close();
-            }
-            catch (IOException exe) {
-            }
-            System.exit(0);
-            }
-    }
     if (ind > 0) {
       switch (ind) {
       case 1:
-        try { 
-            PrintWriter pw = new PrintWriter(bat);
-            pw.print("java -Xmx512M -Xms512M -jar " + user);
-            pw.close();
-            if (!bat.canExecute()){
-               bat.setExecutable(true);
-            }
-            minecraft = Runtime.getRuntime().exec(bat.getAbsolutePath());
+        try { minecraft = Runtime.getRuntime().exec(new StringBuilder().append("java -Xmx512M -Xms512M -jar ").append(user).toString());
         } catch (IOException e) {
           JOptionPane.showMessageDialog(null, "Error, no se ha podido ejecutar Minecraft.");
           if (!this.error.exists()) {
@@ -755,14 +724,7 @@ public class Vista2 extends javax.swing.JFrame {
         }
           break;
       case 2:
-        try {
-            PrintWriter pw = new PrintWriter(bat);
-            pw.print("java -Xmx1024M -Xms1024M -jar " + user);
-            pw.close();
-            if (!bat.canExecute()){
-               bat.setExecutable(true);
-            }
-            minecraft = Runtime.getRuntime().exec(bat.getAbsolutePath());
+        try {minecraft = Runtime.getRuntime().exec(new StringBuilder().append("java -Xmx1024M -Xms1024M -jar ").append(user).toString());
         } catch (IOException e) {
           JOptionPane.showMessageDialog(null, "Error, no se ha podido ejecutar Minecraft.");
           if (!this.error.exists()) {
@@ -784,14 +746,7 @@ public class Vista2 extends javax.swing.JFrame {
         }
           break;
       case 3:
-        try {
-            PrintWriter pw = new PrintWriter(bat);
-            pw.print("java -Xmx2048M -Xms2048M -jar " + user);
-            pw.close();
-            if (!bat.canExecute()){
-               bat.setExecutable(true);
-            }
-            minecraft = Runtime.getRuntime().exec(bat.getAbsolutePath());
+        try {minecraft = Runtime.getRuntime().exec(new StringBuilder().append("java -Xmx2048M -Xms2048M -jar ").append(user).toString());
         } catch (IOException e) {
           JOptionPane.showMessageDialog(null, "Error, no se ha podido ejecutar Minecraft.");
           if (!this.error.exists()) {
@@ -813,14 +768,7 @@ public class Vista2 extends javax.swing.JFrame {
         }
           break;
       case 4:
-        try {
-            PrintWriter pw = new PrintWriter(bat);
-            pw.print("java -Xmx4096M -Xms4096M -jar " + user);
-            pw.close();
-            if (!bat.canExecute()){
-               bat.setExecutable(true);
-            }
-            minecraft = Runtime.getRuntime().exec(bat.getAbsolutePath());
+        try {minecraft = Runtime.getRuntime().exec(new StringBuilder().append("java -Xmx4096M -Xms4096M -jar ").append(user).toString());
         } catch (IOException e) {
           JOptionPane.showMessageDialog(null, "Error, no se ha podido ejecutar Minecraft.");
           if (!this.error.exists()){
@@ -883,41 +831,10 @@ public class Vista2 extends javax.swing.JFrame {
     }
     Process minecraftshafter;
     String user = new StringBuilder().append(System.getProperty("user.home")).append("\\AppData\\Roaming\\.minecraft\\Mineshafter-proxy.jar").toString();
-    File bat = new File(System.getProperty("user.home") + "\\AppData\\Roaming\\.minecraft\\exec.bat");
-    if (!bat.exists()){
-            try {
-                bat.createNewFile();
-            } catch (IOException ex) {
-                JOptionPane.showMessageDialog(null, "Error, no se ha podido ejecutar Minecraft.");
-            if (!error.exists()) {
-                  try {
-                    error.createNewFile();
-                  }
-                  catch (IOException exe) {
-                  }
-              }
-            try {
-              PrintWriter pw = new PrintWriter(error);
-              pw.print(ex.getMessage());
-              pw.println();
-              pw.close();
-            }
-            catch (IOException exe) {
-            }
-            System.exit(0);
-            }
-    }
     if (ind > 0) {
       switch (ind) {
       case 1:
-        try { 
-            PrintWriter pw = new PrintWriter(bat);
-            pw.print("java -Xmx512M -Xms512M -jar " + user);
-            pw.close();
-            if (!bat.canExecute()){
-               bat.setExecutable(true);
-            }
-            minecraftshafter = Runtime.getRuntime().exec(bat.getAbsolutePath());
+        try { minecraftshafter = Runtime.getRuntime().exec(new StringBuilder().append("java -Xmx512M -Xms512M -jar ").append(user).toString());
         } catch (IOException e) {
           JOptionPane.showMessageDialog(null, "Error, no se ha podido ejecutar Minecraft.");
           if (!this.error.exists()) {
@@ -939,14 +856,7 @@ public class Vista2 extends javax.swing.JFrame {
         }
           break;
       case 2:
-        try {
-            PrintWriter pw = new PrintWriter(bat);
-            pw.print("java -Xmx1024M -Xms1024M -jar " + user);
-            pw.close();
-            if (!bat.canExecute()){
-               bat.setExecutable(true);
-            }
-            minecraftshafter = Runtime.getRuntime().exec(bat.getAbsolutePath());
+        try {minecraftshafter = Runtime.getRuntime().exec(new StringBuilder().append("java -Xmx1024M -Xms1024M -jar ").append(user).toString());
         } catch (IOException e) {
           JOptionPane.showMessageDialog(null, "Error, no se ha podido ejecutar Minecraft.");
           if (!this.error.exists()) {
@@ -968,14 +878,7 @@ public class Vista2 extends javax.swing.JFrame {
         }
           break;
       case 3:
-        try {
-            PrintWriter pw = new PrintWriter(bat);
-            pw.print("java -Xmx2048M -Xms2048M -jar " + user);
-            pw.close();
-            if (!bat.canExecute()){
-               bat.setExecutable(true);
-            }
-            minecraftshafter = Runtime.getRuntime().exec(bat.getAbsolutePath());
+        try {minecraftshafter = Runtime.getRuntime().exec(new StringBuilder().append("java -Xmx2048M -Xms2048M -jar ").append(user).toString());
         } catch (IOException e) {
           JOptionPane.showMessageDialog(null, "Error, no se ha podido ejecutar Minecraft.");
           if (!this.error.exists()) {
@@ -997,14 +900,7 @@ public class Vista2 extends javax.swing.JFrame {
         }
           break;
       case 4:
-        try {
-            PrintWriter pw = new PrintWriter(bat);
-            pw.print("java -Xmx4096M -Xms4096M -jar " + user);
-            pw.close();
-            if (!bat.canExecute()){
-               bat.setExecutable(true);
-            }
-            minecraftshafter = Runtime.getRuntime().exec(bat.getAbsolutePath());
+        try {minecraftshafter = Runtime.getRuntime().exec(new StringBuilder().append("java -Xmx4096M -Xms4096M -jar ").append(user).toString());
         } catch (IOException e) {
           JOptionPane.showMessageDialog(null, "Error, no se ha podido ejecutar Minecraft.");
           if (!this.error.exists()){
