@@ -1,6 +1,7 @@
 
 
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,6 +31,8 @@ public class Vista2 extends javax.swing.JFrame {
      * Creates new form Vista2
      */
     public Vista2(String P) {
+        Image icon = new ImageIcon(getClass().getResource(System.getProperty("user.home") + "\\AppData\\Roaming\\.minecraft\\5547.png")).getImage();
+        this.setIconImage(icon);
         pass = P;
         //Asignamos el fondo al Panel
         setContentPane(new Background());
