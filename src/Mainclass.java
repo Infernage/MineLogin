@@ -46,6 +46,7 @@ public class Mainclass {
             if (boo.equals("true")){
                 //Si en el fichero hay un true, significa que ya se ha registrado y abrimos la Vista2
             Vista2 vista = new Vista2(pss);
+            vista.setIconImage(new ImageIcon(System.getProperty("user.home") + "\\AppData\\Roaming\\.minecraft\\5547.png").getImage());
             vista.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             vista.setTitle(title + " " + version);
             vista.setLocationRelativeTo(null);
