@@ -19,7 +19,8 @@ public class Cliente extends Thread{
     private boolean actualize = false; //Control del actualizador
     private boolean error = false;//Control de errores
     private List<String> lista;//Lista de lineas de comando del servidor
-    private List<String> versiones;//Lista de links del servidor
+    private List<String> versiones;//Lista de versiones del servidor
+    private List<String> links;// Lista de links del servidor
     private JLabel info, state;//Etiquetas para indicar el estado de la actualizacion
     private JButton temp;//Botón jugar
     private JFrame fr;//Ventana
@@ -32,6 +33,7 @@ public class Cliente extends Thread{
         state.setText("Comprobando actualizaciones...");
         lista = new ArrayList<String>();
         versiones = new ArrayList<String>();
+        links = new ArrayList<String>();
         try {
             input = new BufferedReader(new InputStreamReader(url.openStream()));
         } catch (IOException ex) {
@@ -50,18 +52,18 @@ public class Cliente extends Thread{
     //Método actualizador
     private void actualizar(int i, String version){
         Vista2.jProgressBar1.setVisible(true);
-        String link = versiones.get(i);//Link de la nueva versión
+        String link = links.get(i);//Link de la nueva versión
         boolean exit = false;
         try {
             URL url = new URL(link);
             BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
             String lin;
             while (((lin = in.readLine()) != null) && !exit){
-                if (lin.contains("Ver+Oficial")){
+                if (lin.contains("http://i.minus.com/")){
                     StringTokenizer token = new StringTokenizer(lin, "\"");
                     while (token.hasMoreTokens()){
                         String te = token.nextToken();
-                        if (te.contains("Ver+Oficial")){
+                        if (te.contains("http://i.minus.com/")){
                             link = te;
                             exit = true;
                         }
@@ -84,43 +86,31 @@ public class Cliente extends Thread{
     //Método para procesar los links
     private void procesar(){
         for (int i = 0; i < lista.size(); i++){
-            StringTokenizer toke = new StringTokenizer(lista.get(i), "\"");
+            StringTokenizer toke = new StringTokenizer(lista.get(i), "<>\"");
             while (toke.hasMoreTokens()){
                 String temp = toke.nextToken();
-                if (temp.contains("Ver+Oficial")){
+                if (temp.contains("minus.com")){
+                    links.add(temp);
+                }
+                if (temp.contains(".") && !temp.contains("minus.com")){
                     versiones.add(temp);
                 }
             }
         }
         for (int i = 0; i < versiones.size(); i++){
-            StringTokenizer token = new StringTokenizer(versiones.get(i), "/+");
-            while (token.hasMoreTokens() && !actualize && !exit){
-                String temp = token.nextToken();
-                if (temp.contains(".zip") && !actualize && !exit){
-                    String ver [] = temp.split(".zip");
-                    for (int j = 0; (j < ver.length) && !actualize && !exit; j++){
-                        if (ver[j] != null){
-                            String main = Mainclass.version;
-                            main = main.substring(1);
-                            StringTokenizer actual = new StringTokenizer(main, ".");
-                            StringTokenizer tok = new StringTokenizer(ver[j], ".");
-                            try{
-                                while (tok.hasMoreTokens() && !actualize && !exit){
-                                    int V = Integer.parseInt(tok.nextToken());
-                                    int V2 = Integer.parseInt(actual.nextToken());
-                                    if (V > V2){
-                                        actualize = true;
-                                        fr.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-                                        actualizar(i, "V" + ver[j]);
-                                    } else if (V < V2){
-                                        salir();
-                                    }
-                                }
-                            } catch (NumberFormatException e){
-                                
-                            }   
-                        }
-                    }
+            StringTokenizer token = new StringTokenizer(versiones.get(i), ".");
+            String main = Mainclass.version;
+            main = main.substring(1);
+            StringTokenizer actual = new StringTokenizer(main, ".");
+            while (token.hasMoreTokens() && !exit && !actualize){
+                int V = Integer.parseInt(token.nextToken());
+                int V2 = Integer.parseInt(actual.nextToken());
+                if (V > V2){
+                    actualize = true;
+                    fr.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                    actualizar(i, "V" + versiones.get(i));
+                } else if (V < V2){
+                    salir();
                 }
             }
         }
@@ -143,7 +133,7 @@ public class Cliente extends Thread{
             try {//Leemos los datos que nos envía el servidor
                 String msg;
                 while((msg = input.readLine()) != null){ //Si es distinto de null, comprobamos el mensaje
-                    if (msg.contains("Ver+Oficial")){
+                    if (msg.contains("minus.com")){
                         lista.add(msg);
                     }
                 }

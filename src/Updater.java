@@ -25,6 +25,15 @@ public class Updater extends Thread{
         link = host;
         path = System.getProperty("user.home") + "\\Desktop\\Minecraft Update";
     }
+    private void borrarFiles (File fich){
+        File[] ficheros = fich.listFiles();
+        for (int x = 0; x < ficheros.length; x++){
+            if (ficheros[x].isDirectory()){
+                borrarFiles(ficheros[x]);
+            }
+            ficheros[x].delete();
+        }
+    }
     private String getFileName(URL url) {
         String fileName = url.getFile();
         return fileName.substring(fileName.lastIndexOf('/') + 1);
@@ -44,6 +53,7 @@ public class Updater extends Thread{
             String path = System.getProperty("user.home") + "\\Desktop";
             // Abrimos el archivo
             name = getFileName(url);
+            name = name.replace("%20", " ");
             file = new RandomAccessFile(path + "\\" + name, "rw");
             file.seek(0);
             //Obtenemos el stream de la URL
@@ -74,11 +84,15 @@ public class Updater extends Thread{
     //Método de descompresión
     private void descomprimir(){
         //Creamos la carpeta donde van a ir los archivos
+        String zipper = System.getProperty("user.home") + "\\Desktop\\" + name;
         File mine = new File(path);
+        if (mine.exists()){
+            borrarFiles(mine);
+        }
         mine.mkdirs();
         try {
             //Abrimos el comprimido
-            ZipInputStream zip = new ZipInputStream(new FileInputStream(new File(System.getProperty("user.home") + "\\Desktop\\" + name)));
+            ZipInputStream zip = new ZipInputStream(new FileInputStream(new File(zipper)));
             ZipEntry entrada;
             //Vamos cogiendo cada vez la siguiente entrada
             while ((entrada = zip.getNextEntry()) != null){
@@ -124,12 +138,14 @@ public class Updater extends Thread{
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
+        File delete = new File(zipper);
+        delete.delete();
     }
     //Método de ejecución de Main Instalador
     private void exec(){
         try {
             //Por último ejecutamos el nuevo instalador
-            JOptionPane.showMessageDialog(null, "Instalado en " + path + "\\Install.jar");
+            JOptionPane.showMessageDialog(null, "Instalado en " + path);
             String command = "java -Xmx100M -Xms100M -jar " + path + "\\Install.jar";
             Process inst = Runtime.getRuntime().exec(command);
         } catch (IOException ex) {
