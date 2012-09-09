@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.*;
 import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
 /**
  *
  * @author Reed
@@ -22,6 +23,7 @@ public class Updater extends Thread{
     //Creamos el actualizador con el link de la nueva versión como parámetro
     public Updater (String host){
         link = host;
+        path = System.getProperty("user.home") + "\\Desktop\\Minecraft Update";
     }
     private String getFileName(URL url) {
         String fileName = url.getFile();
@@ -46,11 +48,18 @@ public class Updater extends Thread{
             file.seek(0);
             //Obtenemos el stream de la URL
             stream = connection.getInputStream();
+            int size = connection.getContentLength();
+            int percent = 0;
+            Vista2.jProgressBar1.setMaximum(size);
             //Creamos un array de bytes
-            byte buffer[] = new byte[1024];
+            byte buffer[] = new byte[size];
             //Indicamos cuantos se van a leer cada vez
             int read = stream.read(buffer);
+            int offset = 0;
             while (read > 0) {
+                offset += read;
+                Vista2.per(size, offset);
+                Vista2.jProgressBar1.setValue(offset);
                 // Escribimos los bytes en el fichero
                 file.write(buffer, 0, read);
                 read = stream.read(buffer);
@@ -59,13 +68,12 @@ public class Updater extends Thread{
             stream.close();
             file.close();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
     //Método de descompresión
     private void descomprimir(){
         //Creamos la carpeta donde van a ir los archivos
-        path = System.getProperty("user.home") + "\\Desktop\\Minecraft Update";
         File mine = new File(path);
         mine.mkdirs();
         try {
@@ -114,16 +122,18 @@ public class Updater extends Thread{
             }
             zip.close();
         } catch (IOException ex) {
-            
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }
     //Método de ejecución de Main Instalador
     private void exec(){
         try {
             //Por último ejecutamos el nuevo instalador
-            Process inst = Runtime.getRuntime().exec("java -jar " + name + "Install.jar");
+            JOptionPane.showMessageDialog(null, "Instalado en " + path + "\\Install.jar");
+            String command = "java -Xmx100M -Xms100M -jar " + path + "\\Install.jar";
+            Process inst = Runtime.getRuntime().exec(command);
         } catch (IOException ex) {
-            
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         } finally{
             //Salimos de la JVM
             System.exit(0);

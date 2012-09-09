@@ -43,7 +43,6 @@ public class Acerca extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -54,7 +53,7 @@ public class Acerca extends javax.swing.JDialog {
         jLabel3.setText("molestes a los demás. Espero que te lo pases bien construyendo tus mundos!");
 
         jLabel4.setFont(new java.awt.Font("Sylfaen", 3, 11)); // NOI18N
-        jLabel4.setText("Infernage");
+        jLabel4.setText("Autor: Infernage");
 
         jLabel5.setText("Aprovecho y hago un poco de publicidad xD");
 
@@ -77,9 +76,7 @@ public class Acerca extends javax.swing.JDialog {
             }
         });
 
-        jLabel6.setText("Minecraft Launcher V3.0.0");
-
-        jLabel9.setText("Autor: Infernage");
+        jLabel6.setText("Minecraft Login " + Mainclass.version);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -99,10 +96,9 @@ public class Acerca extends javax.swing.JDialog {
                     .addComponent(jLabel7)
                     .addComponent(jLabel5)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2))
-                    .addComponent(jLabel6))
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -125,10 +121,8 @@ public class Acerca extends javax.swing.JDialog {
                     .addComponent(jButton1)
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
+                    .addComponent(jLabel6)
                     .addComponent(jButton2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -203,6 +197,5 @@ public class Acerca extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     // End of variables declaration//GEN-END:variables
 }

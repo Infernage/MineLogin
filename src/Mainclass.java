@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 public class Mainclass {
     //Versión
     public final static String title = "Login Minecraft";
-    public final static String version = "V3.0.1";
+    public final static String version = "V3.1.0";
 
     /**
      * @param args the command line arguments
