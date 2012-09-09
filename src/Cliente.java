@@ -51,6 +51,31 @@ public class Cliente extends Thread{
     private void actualizar(int i, String version){
         Vista2.jProgressBar1.setVisible(true);
         String link = versiones.get(i);//Link de la nueva versión
+        boolean exit = false;
+        try {
+            URL url = new URL(link);
+            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+            String lin;
+            while (((lin = in.readLine()) != null) && !exit){
+                if (lin.contains("Ver+Oficial")){
+                    StringTokenizer token = new StringTokenizer(lin, "\"");
+                    while (token.hasMoreTokens()){
+                        String te = token.nextToken();
+                        if (te.contains("Ver+Oficial")){
+                            link = te;
+                            exit = true;
+                        }
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            state.setForeground(Color.red);
+            state.setText("ERROR!");
+            info.setForeground(Color.red);
+            info.setText(ex.getMessage());
+            salir();
+            error = true;
+        }
         state.setText("Actualizando a la versión " + version);
         Updater update = new Updater(link);//Creamos el actualizador
         update.start();//Lo ejecutamos
