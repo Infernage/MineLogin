@@ -59,7 +59,6 @@ public class Updater extends Thread{
             //Obtenemos el stream de la URL
             stream = connection.getInputStream();
             int size = connection.getContentLength();
-            int percent = 0;
             Vista2.jProgressBar1.setMaximum(size);
             //Creamos un array de bytes
             byte buffer[] = new byte[size];

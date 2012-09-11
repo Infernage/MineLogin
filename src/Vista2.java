@@ -94,7 +94,7 @@ public class Vista2 extends javax.swing.JFrame {
         //Creamos el cliente del actualizador
         try{
             URL url = new URL("http://minechinchas.blogspot.com/2012/09/downloads.html");
-            Cliente client = new Cliente(jLabel1, jLabel5, jButton5, url, this);
+            Cliente client = new Cliente(jLabel1, jLabel5, jButton5, url, this, jButton4, jButton3);
             client.start();
         } catch(Exception e){
             jLabel1.setForeground(Color.red);
@@ -414,6 +414,7 @@ public class Vista2 extends javax.swing.JFrame {
         jButton3.setText("Tengo cuenta de Minecraft");
         jButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(216, 216, 216), 3));
         jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButton3.setEnabled(false);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -425,6 +426,7 @@ public class Vista2 extends javax.swing.JFrame {
         jButton4.setForeground(new java.awt.Color(216, 216, 216));
         jButton4.setText("Tengo Mineshafter");
         jButton4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 0), 3));
+        jButton4.setEnabled(false);
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);

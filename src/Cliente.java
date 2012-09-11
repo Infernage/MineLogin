@@ -22,13 +22,15 @@ public class Cliente extends Thread{
     private List<String> versiones;//Lista de versiones del servidor
     private List<String> links;// Lista de links del servidor
     private JLabel info, state;//Etiquetas para indicar el estado de la actualizacion
-    private JButton temp;//Botón jugar
+    private JButton play, MC, MS;//Botón jugar
     private JFrame fr;//Ventana
     //Creamos el cliente
-    public Cliente(JLabel A, JLabel B, JButton C, URL url, JFrame fra){
+    public Cliente(JLabel A, JLabel B, JButton C, URL url, JFrame fra, JButton D, JButton E){
         info = B;
         state = A;
-        temp = C;
+        play = C;
+        MS = D;
+        MC = E;
         fr = fra;
         state.setText("Comprobando actualizaciones...");
         lista = new ArrayList<String>();
@@ -81,7 +83,9 @@ public class Cliente extends Thread{
         state.setText("Actualizando a la versión " + version);
         Updater update = new Updater(link);//Creamos el actualizador
         update.start();//Lo ejecutamos
-        temp.setEnabled(false);
+        play.setEnabled(false);
+        MC.setEnabled(false);
+        MS.setEnabled(false);
     }
     //Método para procesar los links
     private void procesar(){
@@ -160,7 +164,9 @@ public class Cliente extends Thread{
             }
         }
         if (!actualize){
-            temp.setEnabled(true);
+            play.setEnabled(true);
+            MC.setEnabled(true);
+            MS.setEnabled(true);
         }
     }
 }
