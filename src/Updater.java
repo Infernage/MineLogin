@@ -200,6 +200,6 @@ public class Updater extends Thread{
         descargar();//Descargamos los archivos necesarios
         descomprimir();//Los descomprimimos
         JOptionPane.showMessageDialog(null, "Instalado en " + path);
-        exec();//Ejecutamos el main
+        //exec();//Ejecutamos el main
     }
 }
