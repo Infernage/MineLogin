@@ -61,7 +61,7 @@ public class Cliente extends Thread{
             BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
             String lin;
             while (((lin = in.readLine()) != null) && !exit){
-                if (lin.contains("http://i.minus.com/")){
+                if (lin.contains("http://i.minus.com/") && lin.contains(".zip")){
                     StringTokenizer token = new StringTokenizer(lin, "\"");
                     while (token.hasMoreTokens()){
                         String te = token.nextToken();

@@ -23,7 +23,11 @@ public class Updater extends Thread{
     //Creamos el actualizador con el link de la nueva versión como parámetro
     public Updater (String host){
         link = host;
-        path = System.getProperty("user.home") + "\\Desktop\\Minecraft Update";
+        if (Mainclass.OS.equals("windows")){
+            path = System.getProperty("user.home") + "\\Desktop\\Minecraft Update";
+        } else if (Mainclass.OS.equals("linux")){
+            path = System.getProperty("user.home") + "/Desktop/Minecraft Update";
+        }
     }
     private void borrarFiles (File fich){
         File[] ficheros = fich.listFiles();
@@ -50,11 +54,20 @@ public class Updater extends Thread{
             connection.setRequestProperty("Range", "bytes=" + 0 + "-");
             // Conectamos al servidor
             connection.connect();
-            String path = System.getProperty("user.home") + "\\Desktop";
+            String path = null;
+            if (Mainclass.OS.equals("windows")){
+                path = System.getProperty("user.home") + "\\Desktop";
+            } else if (Mainclass.OS.equals("linux")){
+                path = System.getProperty("user.home") + "/Desktop";
+            }
             // Abrimos el archivo
             name = getFileName(url);
             name = name.replace("%20", " ");
-            file = new RandomAccessFile(path + "\\" + name, "rw");
+            if (Mainclass.OS.equals("windows")){
+                file = new RandomAccessFile(path + "\\" + name, "rw");
+            } else if (Mainclass.OS.equals("linux")){
+                file = new RandomAccessFile(path + "/" + name, "rw");
+            }
             file.seek(0);
             //Obtenemos el stream de la URL
             stream = connection.getInputStream();
@@ -83,7 +96,12 @@ public class Updater extends Thread{
     //Método de descompresión
     private void descomprimir(){
         //Creamos la carpeta donde van a ir los archivos
-        String zipper = System.getProperty("user.home") + "\\Desktop\\" + name;
+        String zipper = null;
+        if (Mainclass.OS.equals("windows")){
+            zipper = System.getProperty("user.home") + "\\Desktop\\" + name;
+        } else if (Mainclass.OS.equals("linux")){
+            zipper = System.getProperty("user.home") + "/Desktop/" + name;
+        }
         File mine = new File(path);
         if (mine.exists()){
             borrarFiles(mine);
@@ -111,25 +129,48 @@ public class Updater extends Thread{
                 if (entrada.getName().endsWith("/")){
                     direc = true;
                 }
-                //Cambiamos el tipo de separación de carpetas
-                StringBuilder build = new StringBuilder(path);
-                for (int i = 0; i < lista.size(); i++){
-                    build.append("\\").append(lista.get(i));
-                }
-                String filero = build.toString();
-                File fich = new File(filero);
-                //Si es un directorio, creamos la carpeta
-                if (direc){
-                    fich.mkdirs();
-                } else{//Sino, traspasamos el archivo a su destino
-                    FileOutputStream salida = new FileOutputStream(fich);
-                    int leido;
-                    byte [] buffer = new byte[4096];
-                    while ((leido = zip.read(buffer)) > 0){
-                        salida.write(buffer, 0, leido);
+                if (Mainclass.OS.equals("windows")){
+                    //Cambiamos el tipo de separación de carpetas
+                    StringBuilder build = new StringBuilder(path);
+                    for (int i = 0; i < lista.size(); i++){
+                        build.append("\\").append(lista.get(i));
                     }
-                    //Cerramos todos los escuchadores
-                    salida.close();
+                    String filero = build.toString();
+                    File fich = new File(filero);
+                    //Si es un directorio, creamos la carpeta
+                    if (direc){
+                        fich.mkdirs();
+                    } else{//Sino, traspasamos el archivo a su destino
+                        FileOutputStream salida = new FileOutputStream(fich);
+                        int leido;
+                        byte [] buffer = new byte[4096];
+                        while ((leido = zip.read(buffer)) > 0){
+                            salida.write(buffer, 0, leido);
+                        }
+                        //Cerramos todos los escuchadores
+                        salida.close();
+                    }
+                } else if (Mainclass.OS.equals("linux")){
+                    //Cambiamos el tipo de separación de carpetas
+                    StringBuilder build = new StringBuilder(path);
+                    for (int i = 0; i < lista.size(); i++){
+                        build.append("/").append(lista.get(i));
+                    }
+                    String filero = build.toString();
+                    File fich = new File(filero);
+                    //Si es un directorio, creamos la carpeta
+                    if (direc){
+                        fich.mkdirs();
+                    } else{//Sino, traspasamos el archivo a su destino
+                        FileOutputStream salida = new FileOutputStream(fich);
+                        int leido;
+                        byte [] buffer = new byte[4096];
+                        while ((leido = zip.read(buffer)) > 0){
+                            salida.write(buffer, 0, leido);
+                        }
+                        //Cerramos todos los escuchadores
+                        salida.close();
+                    }
                 }
                 zip.closeEntry();
             }
@@ -145,7 +186,12 @@ public class Updater extends Thread{
         try {
             //Por último ejecutamos el nuevo instalador
             JOptionPane.showMessageDialog(null, "Instalado en " + path);
-            String command = "java -Xmx100M -Xms100M -jar " + path + "\\Install.jar";
+            String command = null;
+            if (Mainclass.OS.equals("windows")){
+                command = "java -Xmx100M -Xms100M -jar " + path + "\\Install.jar";
+            } else if (Mainclass.OS.equals("linux")){
+                command = "java -Xmx100M -Xms100M -jar " + path + "/Install.jar";
+            }
             Process inst = Runtime.getRuntime().exec(command);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());

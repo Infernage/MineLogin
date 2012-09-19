@@ -49,46 +49,91 @@ public class Vista2 extends javax.swing.JFrame {
         jButton7.setContentAreaFilled(false);
         jButton8.setFocusPainted(false);
         jButton8.setContentAreaFilled(false);
-        datos = new File(System.getProperty("user.home") + "\\AppData\\Roaming");
-        error = new File(System.getProperty("user.home") + "\\AppData\\Roaming\\Data\\LogEr.txt");
-        File rem = new File (datos.getAbsolutePath() + "\\Data\\RMB.txt");
-        //Controlamos las pestañas de recordar
-        if (rem.exists()){
-            try{
-                BufferedReader bf = new BufferedReader (new FileReader (rem));
-                String temp = bf.readLine();
-                String temp2 = bf.readLine();
-                StringECP t = new StringECP(P);
-                File te = new File (datos.getAbsolutePath() + "\\Data\\data.cfg");
-                bf.close();
-                if (temp.equals("true")){
-                    //Si se seleccionó en un principio la pestaña, se deja seleccionada y se recuerda el usuario
-                    jCheckBox1.setSelected(true);
-                    if (te.exists()){
-                        //Si el fichero de datos existe, se recuerda el usuario
-                        bf = new BufferedReader (new FileReader (te));
-                        temp = bf.readLine();
-                        bf.close();
-                        if (temp != null){
-                            String A = t.decrypt(temp);
-                            jTextField1.setText(A);
+        if (Mainclass.OS.equals("windows")){
+            datos = new File(System.getProperty("user.home") + "\\AppData\\Roaming");
+            error = new File(System.getProperty("user.home") + "\\AppData\\Roaming\\Data\\LogEr.txt");
+            File rem = new File (datos.getAbsolutePath() + "\\Data\\RMB.txt");
+            //Controlamos las pestañas de recordar
+            if (rem.exists()){
+                try{
+                    BufferedReader bf = new BufferedReader (new FileReader (rem));
+                    String temp = bf.readLine();
+                    String temp2 = bf.readLine();
+                    StringECP t = new StringECP(P);
+                    File te = new File (datos.getAbsolutePath() + "\\Data\\data.cfg");
+                    bf.close();
+                    if (temp.equals("true")){
+                        //Si se seleccionó en un principio la pestaña, se deja seleccionada y se recuerda el usuario
+                        jCheckBox1.setSelected(true);
+                        if (te.exists()){
+                            //Si el fichero de datos existe, se recuerda el usuario
+                            bf = new BufferedReader (new FileReader (te));
+                            temp = bf.readLine();
+                            bf.close();
+                            if (temp != null){
+                                String A = t.decrypt(temp);
+                                jTextField1.setText(A);
+                            }
                         }
                     }
-                }
-                if (temp2.equals("true")){
-                    //Si se seleccionó en un principio la pestaña, se deja seleccionada y se recuerda la contraseña
-                    jCheckBox2.setSelected(true);
-                    bf = new BufferedReader (new FileReader (te));
-                    temp = bf.readLine();
-                    temp2 = bf.readLine();
-                    bf.close();
-                    if (temp2 != null){
-                        String A = t.decrypt(temp2);
-                        jPasswordField1.setText(A);
+                    if (temp2.equals("true")){
+                        //Si se seleccionó en un principio la pestaña, se deja seleccionada y se recuerda la contraseña
+                        jCheckBox2.setSelected(true);
+                        bf = new BufferedReader (new FileReader (te));
+                        temp = bf.readLine();
+                        temp2 = bf.readLine();
+                        bf.close();
+                        if (temp2 != null){
+                            String A = t.decrypt(temp2);
+                            jPasswordField1.setText(A);
+                        }
                     }
+                } catch (IOException e){
+                    
                 }
-            } catch (IOException e){
-                
+            }
+        } else if (Mainclass.OS.equals("linux")){
+            datos = new File(System.getProperty("user.home"));
+            error = new File(System.getProperty("user.home") + "/Data/LogEr.txt");
+            File rem = new File (datos.getAbsolutePath() + "/Data/RMB.txt");
+            //Controlamos las pestañas de recordar
+            if (rem.exists()){
+                try{
+                    BufferedReader bf = new BufferedReader (new FileReader (rem));
+                    String temp = bf.readLine();
+                    String temp2 = bf.readLine();
+                    StringECP t = new StringECP(P);
+                    File te = new File (datos.getAbsolutePath() + "/Data/data.cfg");
+                    bf.close();
+                    if (temp.equals("true")){
+                        //Si se seleccionó en un principio la pestaña, se deja seleccionada y se recuerda el usuario
+                        jCheckBox1.setSelected(true);
+                        if (te.exists()){
+                            //Si el fichero de datos existe, se recuerda el usuario
+                            bf = new BufferedReader (new FileReader (te));
+                            temp = bf.readLine();
+                            bf.close();
+                            if (temp != null){
+                                String A = t.decrypt(temp);
+                                jTextField1.setText(A);
+                            }
+                        }
+                    }
+                    if (temp2.equals("true")){
+                        //Si se seleccionó en un principio la pestaña, se deja seleccionada y se recuerda la contraseña
+                        jCheckBox2.setSelected(true);
+                        bf = new BufferedReader (new FileReader (te));
+                        temp = bf.readLine();
+                        temp2 = bf.readLine();
+                        bf.close();
+                        if (temp2 != null){
+                            String A = t.decrypt(temp2);
+                            jPasswordField1.setText(A);
+                        }
+                    }
+                } catch (IOException e){
+                    
+                }
             }
         }
         //Creamos el cliente del actualizador
@@ -119,7 +164,12 @@ public class Vista2 extends javax.swing.JFrame {
         //Método del botón ¡Jugar!
         boolean open = false; boolean er = false; boolean remember = jCheckBox1.isSelected(); boolean rememberP = jCheckBox2.isSelected();
         //Comprobamos si el Recordar está activo y lo recordamos para un futuro
-    File rem = new File(datos.getAbsolutePath() + "\\Data\\RMB.txt");
+    File rem = null;
+    if (Mainclass.OS.equals("windows")){
+        rem = new File(datos.getAbsolutePath() + "\\Data\\RMB.txt");
+    } else if (Mainclass.OS.equals("linux")){
+        rem = new File(datos.getAbsolutePath() + "/Data/RMB.txt");
+    }
     if (!rem.exists()) {
             try {
               rem.createNewFile();
@@ -136,7 +186,12 @@ public class Vista2 extends javax.swing.JFrame {
       pw.print(rememberP);
       pw.close();
       //Leemos el fichero de datos
-      BufferedReader bf = new BufferedReader(new FileReader(new File(datos.getAbsolutePath() + "\\Data\\data.cfg")));
+      BufferedReader bf = null;
+      if (Mainclass.OS.equals("windows")){
+          bf = new BufferedReader(new FileReader(new File(datos.getAbsolutePath() + "\\Data\\data.cfg")));
+      } else if (Mainclass.OS.equals("linux")){
+          bf = new BufferedReader(new FileReader(new File(datos.getAbsolutePath() + "/Data/data.cfg")));
+      }
       String temp1 = null; String temp2 = null;
       //Creamos el desencriptador y comprobamos si el usuario y la contraseña coinciden
       StringECP crypt = new StringECP(this.pass);
@@ -187,14 +242,25 @@ public class Vista2 extends javax.swing.JFrame {
           JOptionPane.showMessageDialog(null, "No ha elegido ninguna opción. Se ejecutará la opción por defecto (1GB)");
       }
       Process minecraft;
-      String user = new StringBuilder().append(System.getProperty("user.home")).append("\\AppData\\Roaming\\.minecraft\\bin\\minecraft.jar").toString();
-      if (ind > 0) { //Según el caso, elegimos una u otra opción
+    String user = null;
+    if (Mainclass.OS.equals("windows")){
+        user = new StringBuilder().append(System.getProperty("user.home")).append("\\AppData\\Roaming\\.minecraft\\minecraft.jar").toString();
+    } else if (Mainclass.OS.equals("linux")){
+        user = new StringBuilder().append(System.getProperty("user.home")).append("/.minecraft/minecraft.jar").toString();
+    }      if (ind > 0) { //Según el caso, elegimos una u otra opción
         switch (ind) {
         case 1:
           try { 
               //Leemos el fichero de comando y creamos el ejecutable
-              File bat = new File (System.getProperty("user.home") + "\\AppData\\Roaming\\.minecraft\\bin\\start.bat");
-              BufferedReader bf = new BufferedReader (new FileReader (new File(System.getProperty("user.home") + "\\AppData\\Roaming\\.minecraft\\bin\\com.txt")));
+              File bat = null;
+              BufferedReader bf = null;
+              if (Mainclass.OS.equals("windows")){
+                  bat =  new File (System.getProperty("user.home") + "\\AppData\\Roaming\\.minecraft\\bin\\start.bat");
+                  bf = new BufferedReader (new FileReader (new File(System.getProperty("user.home") + "\\AppData\\Roaming\\.minecraft\\bin\\com.txt")));
+              } else if (Mainclass.OS.equals("linux")){
+                  bat =  new File (System.getProperty("user.home") + "/.minecraft/bin/start.bat");
+                  bf = new BufferedReader (new FileReader (new File(System.getProperty("user.home") + "/.minecraft/bin/com.txt")));
+              }
               String comand = bf.readLine();
               bf.close();
               if (!bat.exists()){
@@ -232,8 +298,15 @@ public class Vista2 extends javax.swing.JFrame {
             break;
         case 2:
           try {
-              File bat = new File (System.getProperty("user.home") + "\\AppData\\Roaming\\.minecraft\\bin\\start.bat");
-              BufferedReader bf = new BufferedReader (new FileReader (new File(System.getProperty("user.home") + "\\AppData\\Roaming\\.minecraft\\bin\\com.txt")));
+              File bat = null;
+              BufferedReader bf = null;
+              if (Mainclass.OS.equals("windows")){
+                  bat =  new File (System.getProperty("user.home") + "\\AppData\\Roaming\\.minecraft\\bin\\start.bat");
+                  bf = new BufferedReader (new FileReader (new File(System.getProperty("user.home") + "\\AppData\\Roaming\\.minecraft\\bin\\com.txt")));
+              } else if (Mainclass.OS.equals("linux")){
+                  bat =  new File (System.getProperty("user.home") + "/.minecraft/bin/start.bat");
+                  bf = new BufferedReader (new FileReader (new File(System.getProperty("user.home") + "/.minecraft/bin/com.txt")));
+              }
               String comand = bf.readLine();
               bf.close();
               if (!bat.exists()){
@@ -268,8 +341,15 @@ public class Vista2 extends javax.swing.JFrame {
             break;
         case 3:
           try {
-              File bat = new File (System.getProperty("user.home") + "\\AppData\\Roaming\\.minecraft\\bin\\start.bat");
-              BufferedReader bf = new BufferedReader (new FileReader (new File(System.getProperty("user.home") + "\\AppData\\Roaming\\.minecraft\\bin\\com.txt")));
+              File bat = null;
+              BufferedReader bf = null;
+              if (Mainclass.OS.equals("windows")){
+                  bat =  new File (System.getProperty("user.home") + "\\AppData\\Roaming\\.minecraft\\bin\\start.bat");
+                  bf = new BufferedReader (new FileReader (new File(System.getProperty("user.home") + "\\AppData\\Roaming\\.minecraft\\bin\\com.txt")));
+              } else if (Mainclass.OS.equals("linux")){
+                  bat =  new File (System.getProperty("user.home") + "/.minecraft/bin/start.bat");
+                  bf = new BufferedReader (new FileReader (new File(System.getProperty("user.home") + "/.minecraft/bin/com.txt")));
+              }
               String comand = bf.readLine();
               bf.close();
               if (!bat.exists()){
@@ -304,8 +384,15 @@ public class Vista2 extends javax.swing.JFrame {
             break;
         case 4:
           try {
-              File bat = new File (System.getProperty("user.home") + "\\AppData\\Roaming\\.minecraft\\bin\\start.bat");
-              BufferedReader bf = new BufferedReader (new FileReader (new File(System.getProperty("user.home") + "\\AppData\\Roaming\\.minecraft\\bin\\com.txt")));
+              File bat = null;
+              BufferedReader bf = null;
+              if (Mainclass.OS.equals("windows")){
+                  bat =  new File (System.getProperty("user.home") + "\\AppData\\Roaming\\.minecraft\\bin\\start.bat");
+                  bf = new BufferedReader (new FileReader (new File(System.getProperty("user.home") + "\\AppData\\Roaming\\.minecraft\\bin\\com.txt")));
+              } else if (Mainclass.OS.equals("linux")){
+                  bat =  new File (System.getProperty("user.home") + "/.minecraft/bin/start.bat");
+                  bf = new BufferedReader (new FileReader (new File(System.getProperty("user.home") + "/.minecraft/bin/com.txt")));
+              }
               String comand = bf.readLine();
               bf.close();
               if (!bat.exists()){
@@ -340,8 +427,13 @@ public class Vista2 extends javax.swing.JFrame {
             break;
         }
         //Creamos el fichero Log si no existía
-        File log = new File(new StringBuilder().append(System.getProperty("user.home")).append("\\AppData\\Roaming\\Data\\LogMC.cfg").toString());
-        if (!log.exists()) {
+      File log = null;
+      if (Mainclass.OS.equals("windows")){
+          log = new File(new StringBuilder().append(System.getProperty("user.home")).append("\\AppData\\Roaming\\Data\\LogMC.cfg").toString());
+      } else if (Mainclass.OS.equals("linux")){
+          log = new File(new StringBuilder().append(System.getProperty("user.home")).append("/Data/LogMC.cfg").toString());
+      }        
+      if (!log.exists()) {
               try {
                 log.createNewFile();
               }
@@ -641,7 +733,12 @@ public class Vista2 extends javax.swing.JFrame {
             String word = JOptionPane.showInputDialog("Introduzca la palabra secreta:");
             if (word != null){
             StringECP stringed = new StringECP(pass);
-            BufferedReader bf = new BufferedReader(new FileReader(new File(datos.getAbsolutePath() + "\\Data\\data.cfg")));
+            BufferedReader bf = null;
+            if (Mainclass.OS.equals("windows")){
+                bf = new BufferedReader(new FileReader(new File(datos.getAbsolutePath() + "\\Data\\data.cfg")));
+            } else if (Mainclass.OS.equals("linux")){
+                bf = new BufferedReader(new FileReader(new File(datos.getAbsolutePath() + "/Data/data.cfg")));
+            }
             String str = bf.readLine();
             String str1 = bf.readLine();
             String str2 = bf.readLine();
@@ -724,7 +821,12 @@ public class Vista2 extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "No ha elegido ninguna opción. Se ejecutará la opción por defecto (1GB)");
     }
     Process minecraft;
-    String user = new StringBuilder().append(System.getProperty("user.home")).append("\\AppData\\Roaming\\.minecraft\\minecraft.jar").toString();
+    String user = null;
+    if (Mainclass.OS.equals("windows")){
+        user = new StringBuilder().append(System.getProperty("user.home")).append("\\AppData\\Roaming\\.minecraft\\minecraft.jar").toString();
+    } else if (Mainclass.OS.equals("linux")){
+        user = new StringBuilder().append(System.getProperty("user.home")).append("/.minecraft/minecraft.jar").toString();
+    }    
     if (ind > 0) {
       switch (ind) {
       case 1:
@@ -816,7 +918,12 @@ public class Vista2 extends javax.swing.JFrame {
         }
           break;
       }
-      File log = new File(new StringBuilder().append(System.getProperty("user.home")).append("\\AppData\\Roaming\\Data\\LogMC.cfg").toString());
+      File log = null;
+      if (Mainclass.OS.equals("windows")){
+          log = new File(new StringBuilder().append(System.getProperty("user.home")).append("\\AppData\\Roaming\\Data\\LogMC.cfg").toString());
+      } else if (Mainclass.OS.equals("linux")){
+          log = new File(new StringBuilder().append(System.getProperty("user.home")).append("/Data/LogMC.cfg").toString());
+      }      
       if (!log.exists()) {
             try {
               log.createNewFile();
@@ -856,8 +963,13 @@ public class Vista2 extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "No ha elegido ninguna opción. Se ejecutará la opción por defecto (1GB)");
     }
     Process minecraftshafter;
-    String user = new StringBuilder().append(System.getProperty("user.home")).append("\\AppData\\Roaming\\.minecraft\\Mineshafter-proxy.jar").toString();
-    if (ind > 0) {
+    String user = null;
+        if (Mainclass.OS.equals("windows")){
+            user = new StringBuilder().append(System.getProperty("user.home")).append("\\AppData\\Roaming\\.minecraft\\Mineshafter-proxy.jar").toString();
+        } else if (Mainclass.OS.equals("linux")){
+            user = new StringBuilder().append(System.getProperty("user.home")).append("/.minecraft/Mineshafter-proxy.jar").toString();
+        }    
+        if (ind > 0) {
       switch (ind) {
       case 1:
         try { minecraftshafter = Runtime.getRuntime().exec(new StringBuilder().append("java -Xmx512M -Xms512M -jar ").append(user).toString());
@@ -948,7 +1060,12 @@ public class Vista2 extends javax.swing.JFrame {
         }
           break;
       }
-      File log = new File(new StringBuilder().append(System.getProperty("user.home")).append("\\AppData\\Roaming\\Data\\LogMC.cfg").toString());
+      File log = null;
+      if (Mainclass.OS.equals("windows")){
+          log = new File(new StringBuilder().append(System.getProperty("user.home")).append("\\AppData\\Roaming\\Data\\LogMC.cfg").toString());
+      } else if (Mainclass.OS.equals("linux")){
+          log = new File(new StringBuilder().append(System.getProperty("user.home")).append("/Data/LogMC.cfg").toString());
+      }
       if (!log.exists()) {
             try {
               log.createNewFile();

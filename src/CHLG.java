@@ -25,7 +25,12 @@ public class CHLG extends Thread{
     private void inicializar(){
         try{
             //Leemos el txt en formato Unicode
-            FileInputStream in = new FileInputStream(System.getProperty("user.home") + "\\AppData\\Roaming\\.minecraft\\mods\\CHLog.txt");
+            FileInputStream in = null;
+            if (Mainclass.OS.equals("windows")){
+                in = new FileInputStream(System.getProperty("user.home") + "\\AppData\\Roaming\\.minecraft\\mods\\CHLog.txt");
+            } else if (Mainclass.OS.equals("linux")){
+                in = new FileInputStream(System.getProperty("user.home") + "/.minecraft/mods/CHLog.txt");
+            }
             InputStreamReader isr = new InputStreamReader (in, "UTF8");
             BufferedReader bf = new BufferedReader (isr);
             String temp;
@@ -39,7 +44,12 @@ public class CHLG extends Thread{
             bf.close();
         }catch(IOException e){
             JOptionPane.showMessageDialog(null, "Error al abrir el ChangeLog.");
-            File error = new File (System.getProperty("user.home") + "\\AppData\\Roaming\\Data\\LogEr.txt");
+            File error = null;
+            if (Mainclass.OS.equals("windows")){
+                error = new File (System.getProperty("user.home") + "\\AppData\\Roaming\\Data\\LogEr.txt");
+            } else if (Mainclass.OS.equals("linux")){
+                error = new File (System.getProperty("user.home") + "/Data/LogEr.txt");
+            }
             if (!error.exists()){
                 try {
                     error.createNewFile();

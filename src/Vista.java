@@ -316,7 +316,12 @@ public class Vista extends javax.swing.JFrame {
     ram.dispose();
     Process minecraft;
     //Indicamos el lugar del Minecraft
-    String user = new StringBuilder().append(System.getProperty("user.home")).append("\\AppData\\Roaming\\.minecraft\\minecraft.jar").toString();
+    String user = null;
+    if (Mainclass.OS.equals("windows")){
+        user = new StringBuilder().append(System.getProperty("user.home")).append("\\AppData\\Roaming\\.minecraft\\minecraft.jar").toString();
+    } else if (Mainclass.OS.equals("linux")){
+        user = new StringBuilder().append(System.getProperty("user.home")).append("/.minecraft/minecraft.jar").toString();
+    }
     if (ind > 0) {
       try {
           //Escribimos en el fichero booleano true, indicando que no hay que hacer registro
@@ -420,7 +425,12 @@ public class Vista extends javax.swing.JFrame {
           break;
       }
       //Creamos un Log en la carpeta de datos para controlar cuando se conecta cada usuario
-      File log = new File(new StringBuilder().append(System.getProperty("user.home")).append("\\AppData\\Roaming\\Data\\LogMC.cfg").toString());
+      File log = null;
+      if (Mainclass.OS.equals("windows")){
+          log = new File(new StringBuilder().append(System.getProperty("user.home")).append("\\AppData\\Roaming\\Data\\LogMC.cfg").toString());
+      } else if (Mainclass.OS.equals("linux")){
+          log = new File(new StringBuilder().append(System.getProperty("user.home")).append("/Data/LogMC.cfg").toString());
+      }
       if (!log.exists()) {
             try {
               log.createNewFile();
@@ -481,20 +491,25 @@ public class Vista extends javax.swing.JFrame {
         // TODO add your handling code here:
         //Lo mismo que el ActionPerformed anterior, pero con Mineshafter
         RAM ram = new RAM(this, true);
-    ram.setLocationRelativeTo(null);
-    ram.setVisible(true);
-    int ind = ram.devolver() + 1;
-    ram.dispose();
-    Process minecraftshafter;
-    String user = new StringBuilder().append(System.getProperty("user.home")).append("\\AppData\\Roaming\\.minecraft\\Mineshafter-proxy.jar").toString();
-    if (ind > 0) {
-      try {
-        PrintWriter pw = new PrintWriter(this.booleano);
-        pw.print("true");
-        pw.close();
-      }
-      catch (IOException e){
-      }
+        ram.setLocationRelativeTo(null);
+        ram.setVisible(true);
+        int ind = ram.devolver() + 1;
+        ram.dispose();
+        Process minecraftshafter;
+        String user = null;
+        if (Mainclass.OS.equals("windows")){
+            user = new StringBuilder().append(System.getProperty("user.home")).append("\\AppData\\Roaming\\.minecraft\\Mineshafter-proxy.jar").toString();
+        } else if (Mainclass.OS.equals("linux")){
+            user = new StringBuilder().append(System.getProperty("user.home")).append("/.minecraft/Mineshafter-proxy.jar").toString();
+        }
+        if (ind > 0) {
+            try {
+            PrintWriter pw = new PrintWriter(this.booleano);
+            pw.print("true");
+            pw.close();
+            } catch (IOException e){
+                
+        }
       switch (ind) {
       case 1:
         try { minecraftshafter = Runtime.getRuntime().exec(new StringBuilder().append("java -Xmx512M -Xms512M -jar ").append(user).toString());
@@ -588,7 +603,12 @@ public class Vista extends javax.swing.JFrame {
         }
           break;
       }
-      File log = new File(new StringBuilder().append(System.getProperty("user.home")).append("\\AppData\\Roaming\\Data\\LogMC.cfg").toString());
+      File log = null;
+      if (Mainclass.OS.equals("windows")){
+          log = new File(new StringBuilder().append(System.getProperty("user.home")).append("\\AppData\\Roaming\\Data\\LogMC.cfg").toString());
+      } else if (Mainclass.OS.equals("linux")){
+          log = new File(new StringBuilder().append(System.getProperty("user.home")).append("/Data/LogMC.cfg").toString());
+      }
       if (!log.exists()) {
             try {
               log.createNewFile();

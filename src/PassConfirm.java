@@ -104,7 +104,12 @@ public class PassConfirm extends javax.swing.JDialog {
         //Botón de aceptar
         boolean change = false;
         try{
-            BufferedReader bf = new BufferedReader(new FileReader (new File (System.getProperty("user.home") + "\\AppData\\Roaming\\Data\\data.cfg")));
+            BufferedReader bf = null;
+            if (Mainclass.OS.equals("windows")){
+                bf = new BufferedReader(new FileReader (new File (System.getProperty("user.home") + "\\AppData\\Roaming\\Data\\data.cfg")));
+            } else if (Mainclass.OS.equals("linux")){
+                bf = new BufferedReader(new FileReader (new File (System.getProperty("user.home") + "/Roaming/Data/data.cfg")));
+            }
             String temp = null, temp1 = null;
             temp = bf.readLine();
             temp = bf.readLine();
@@ -122,12 +127,21 @@ public class PassConfirm extends javax.swing.JDialog {
                 String pass1 = new String (jPasswordField1.getPassword()), pass2 = new String (jPasswordField2.getPassword());
                 if (pass1.equals(pass2)){
                     //Si coincide, obtenemos el nombre de usuario y lo desencriptamos
-                    bf = new BufferedReader (new FileReader (new File(System.getProperty("user.home") + "\\AppData\\Roaming\\Data\\data.cfg")));
+                    if (Mainclass.OS.equals("windows")){
+                        bf = new BufferedReader (new FileReader (new File(System.getProperty("user.home") + "\\AppData\\Roaming\\Data\\data.cfg")));
+                    } else if (Mainclass.OS.equals("linux")){
+                        bf = new BufferedReader (new FileReader (new File(System.getProperty("user.home") + "/Data/data.cfg")));
+                    }
                     String tem = bf.readLine();
                     if (tem != null){
                     String user = crypt.decrypt(tem);
                     //Escribimos de nuevo el nombre de usuario, la nueva contraseña y la palabra secreta en el fichero de datos
-                    PrintWriter pw = new PrintWriter(new File(System.getProperty("user.home") + "\\AppData\\Roaming\\Data\\data.cfg"));
+                    PrintWriter pw = null;
+                    if (Mainclass.OS.equals("windows")){
+                        pw = new PrintWriter(new File(System.getProperty("user.home") + "\\AppData\\Roaming\\Data\\data.cfg"));
+                    } else if (Mainclass.OS.equals("linux")){
+                        pw = new PrintWriter(new File(System.getProperty("user.home") + "/Data/data.cfg"));
+                    }
                     pw.print(crypt.encrypt(user));
                     pw.println();
                     pw.print(crypt.encrypt(pass1));
@@ -148,7 +162,12 @@ public class PassConfirm extends javax.swing.JDialog {
             }
         } catch (IOException e){
             JOptionPane.showMessageDialog(null, "Error en el cambio de contraseña.");
-            File error = new File (System.getProperty("user.home") + "\\AppData\\Roaming\\Data\\LogEr.txt");
+            File error = null;
+            if (Mainclass.OS.equals("windows")){
+                error = new File (System.getProperty("user.home") + "\\AppData\\Roaming\\Data\\LogEr.txt");
+            } else if (Mainclass.OS.equals("linux")){
+                error = new File (System.getProperty("user.home") + "/Data/LogEr.txt");
+            }
             if (!error.exists()){
                 try {
                     error.createNewFile();
