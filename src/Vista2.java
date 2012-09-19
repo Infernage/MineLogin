@@ -141,6 +141,7 @@ public class Vista2 extends javax.swing.JFrame {
             URL url = new URL("http://minechinchas.blogspot.com/2012/09/downloads.html");
             Cliente client = new Cliente(jLabel1, jLabel5, jButton5, url, this, jButton4, jButton3);
             client.start();
+            Mainclass.hilos.put("Cliente", client);
         } catch(Exception e){
             jLabel1.setForeground(Color.red);
             jLabel1.setText("ERROR!");
@@ -159,6 +160,7 @@ public class Vista2 extends javax.swing.JFrame {
     private void inicializar(){
         CHLG text = new CHLG(jTextArea1);
         text.start();
+        Mainclass.hilos.put("ChangeLog", text);
     }
     private void Play(){
         //Método del botón ¡Jugar!

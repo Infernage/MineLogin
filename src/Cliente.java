@@ -83,6 +83,7 @@ public class Cliente extends Thread{
         state.setText("Actualizando a la versión " + version);
         Updater update = new Updater(link);//Creamos el actualizador
         update.start();//Lo ejecutamos
+        Mainclass.hilos.put("Updater", update);
         play.setEnabled(false);
         MC.setEnabled(false);
         MS.setEnabled(false);

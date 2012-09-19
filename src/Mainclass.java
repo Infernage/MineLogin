@@ -19,12 +19,13 @@ public class Mainclass {
     public final static String title = "Login Minecraft";
     public final static String version = "V3.1.0";
     public static String OS = System.getProperty("os.name");
-
+    public static Map<String, Thread> hilos;
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        hilos = new HashMap<String, Thread>();
         StringTokenizer token = new StringTokenizer(OS, " ");
         OS = token.nextToken().toLowerCase();
         token = null;
@@ -121,6 +122,5 @@ public class Mainclass {
                 Vista.main(path.toString(), pss, fichero.getAbsolutePath());
             }
         }
-        
     }
 }

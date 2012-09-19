@@ -183,28 +183,23 @@ public class Updater extends Thread{
     }
     //Método de ejecución de Main Instalador
     private void exec(){
-        try {
             //Por último ejecutamos el nuevo instalador
-            JOptionPane.showMessageDialog(null, "Instalado en " + path);
-            String command = null;
-            if (Mainclass.OS.equals("windows")){
-                command = "java -Xmx100M -Xms100M -jar " + path + "\\Install.jar";
-            } else if (Mainclass.OS.equals("linux")){
-                command = "java -Xmx100M -Xms100M -jar " + path + "/Install.jar";
-            }
-            Process inst = Runtime.getRuntime().exec(command);
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        } finally{
-            //Salimos de la JVM
-            System.exit(0);
+        String command = null;
+        if (Mainclass.OS.equals("windows")){
+            command = "java -jar " + path + "\\Install.jar";
+        } else if (Mainclass.OS.equals("linux")){
+            command = "java -jar " + path + "/Install.jar";
         }
+        Installer exe = new Installer(command);
+        exe.start();
+        Mainclass.hilos.put("Installer", exe);
     }
     //Método de ejecución
     @Override
     public void run(){
         descargar();//Descargamos los archivos necesarios
         descomprimir();//Los descomprimimos
+        JOptionPane.showMessageDialog(null, "Instalado en " + path);
         exec();//Ejecutamos el main
     }
 }
