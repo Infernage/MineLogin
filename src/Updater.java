@@ -61,8 +61,7 @@ public class Updater extends Thread{
                 path = System.getProperty("user.home") + "/Desktop";
             }
             // Abrimos el archivo
-            name = getFileName(url);
-            name = name.replace("%20", " ");
+            name = "Update.zip";
             if (Mainclass.OS.equals("windows")){
                 file = new RandomAccessFile(path + "\\" + name, "rw");
             } else if (Mainclass.OS.equals("linux")){
@@ -90,7 +89,8 @@ public class Updater extends Thread{
             stream.close();
             file.close();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null, "[ERROR] Download crashed!");
+            System.err.println(e);
         }
     }
     //Método de descompresión
@@ -201,5 +201,6 @@ public class Updater extends Thread{
         descomprimir();//Los descomprimimos
         JOptionPane.showMessageDialog(null, "Instalado en " + path);
         //exec();//Ejecutamos el main
+        System.exit(0);
     }
 }

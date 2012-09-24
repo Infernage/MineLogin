@@ -61,11 +61,11 @@ public class Cliente extends Thread{
             BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
             String lin;
             while (((lin = in.readLine()) != null) && !exit){
-                if (lin.contains("http://i.minus.com/") && lin.contains(".zip")){
-                    StringTokenizer token = new StringTokenizer(lin, "\"");
+                if (lin.contains("2shared.com/download") && lin.contains(".zip")){
+                    StringTokenizer token = new StringTokenizer(lin, "'");
                     while (token.hasMoreTokens()){
                         String te = token.nextToken();
-                        if (te.contains("http://i.minus.com/")){
+                        if (te.contains(".zip")){
                             link = te;
                             exit = true;
                         }
@@ -94,10 +94,10 @@ public class Cliente extends Thread{
             StringTokenizer toke = new StringTokenizer(lista.get(i), "<>\"");
             while (toke.hasMoreTokens()){
                 String temp = toke.nextToken();
-                if (temp.contains("minus.com")){
+                if (temp.contains("2shared.com")){
                     links.add(temp);
                 }
-                if (temp.contains(".") && !temp.contains("minus.com")){
+                if (temp.contains(".") && !temp.contains("2shared.com")){
                     versiones.add(temp);
                 }
             }
@@ -138,7 +138,7 @@ public class Cliente extends Thread{
             try {//Leemos los datos que nos envía el servidor
                 String msg;
                 while((msg = input.readLine()) != null){ //Si es distinto de null, comprobamos el mensaje
-                    if (msg.contains("minus.com")){
+                    if (msg.contains("2shared.com")){
                         lista.add(msg);
                     }
                 }

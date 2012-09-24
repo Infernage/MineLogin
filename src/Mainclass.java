@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 public class Mainclass {
     //Versión
     public final static String title = "Login Minecraft";
-    public final static String version = "V3.1.1";
+    public final static String version = "VX.X.X";
     public static String OS = System.getProperty("os.name");
     public static Map<String, Thread> hilos;
     /**
